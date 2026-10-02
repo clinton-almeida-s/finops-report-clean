@@ -1,0 +1,68 @@
+<!-- finops_report/templates/report.html.j2 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FinOps Boardroom Report — 2026-10-02</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 900px; margin: 2em auto; padding: 0 1em; color: #1a1a2e; }
+  h1 { color: #16213e; border-bottom: 2px solid #0f3460; padding-bottom: 0.3em; }
+  h2 { color: #0f3460; margin-top: 2em; }
+  .meta { color: #666; font-size: 0.9em; }
+  .rec { background: #f8f9fa; border-left: 4px solid #0f3460; padding: 0.75em 1em; margin: 0.5em 0; }
+  .savings { color: #10b981; font-weight: bold; }
+  pre { background: #1e1e2e; color: #cdd6f4; padding: 1em; border-radius: 6px; overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+  th { background: #16213e; color: white; }
+</style>
+</head>
+<body>
+<h1>FinOps Boardroom Report</h1>
+<p class="meta">Generated: 2026-10-02 &middot; GCP Cost Analysis</p>
+
+<h2>Executive Summary</h2>
+<p>Monthly spend is $4,200 with a 15% upward trend over the last 3 months.</p>
+
+<h2>Top Cost Drivers</h2>
+<table>
+<tr><th>Driver</th><th>Monthly Cost</th></tr>
+
+<tr><td>Compute Engine</td><td>$2400.0</td></tr>
+
+<tr><td>Cloud SQL</td><td>$1000.0</td></tr>
+
+<tr><td>Cloud Storage</td><td>$480.0</td></tr>
+
+<tr><td>Cloud Logging</td><td>$200.0</td></tr>
+
+<tr><td>Cloud CDN</td><td>$120.0</td></tr>
+
+</table>
+
+<h2>Recommendations</h2>
+
+<div class="rec">
+  <strong>Right-size dev-worker-02</strong>
+  <span class="savings"> — $120/mo</span>
+  <span style="float:right; background:#10b981; color:white; padding:2px 6px; border-radius:4px; font-size:0.8em;">LOW</span>
+  <p>CPU avg 12%, memory avg 22%. Downsize from n1-standard-4 to e2-standard-2.</p>
+</div>
+
+<div class="rec">
+  <strong>Migrate batch-processor to E2</strong>
+  <span class="savings"> — $200/mo</span>
+  <span style="float:right; background:#f59e0b; color:white; padding:2px 6px; border-radius:4px; font-size:0.8em;">MEDIUM</span>
+  <p>Sustained use discount applies on E2 for steady workloads.</p>
+</div>
+
+
+<h2>Terraform Implementation Snippets</h2>
+
+<pre>resource "google_compute_instance" "worker" {
+  machine_type = "e2-standard-2"
+}</pre>
+
+
+</body>
+</html>
